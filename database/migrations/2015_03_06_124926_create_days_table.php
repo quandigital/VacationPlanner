@@ -3,25 +3,24 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDaysTable extends Migration {
+class CreateDaysTable extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('days', function(Blueprint $table)
-		{
-			$table->increments('id');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('days', function (Blueprint $table) {
+            $table->increments('id');
             $table->date('date');
             $table->boolean('weekday');
             $table->boolean('holiday');
-		});
+        });
 
-        Schema::create('day_user', function(Blueprint $table)
-        {
+        Schema::create('day_user', function (Blueprint $table) {
             $table->integer('day_id')->unsigned()->index();
             $table->foreign('day_id')->references('id')->on('days')->onDelete('cascade');
             $table->integer('user_id')->unsigned()->index();
@@ -30,17 +29,17 @@ class CreateDaysTable extends Migration {
             $table->date('authorized_at')->nullable();
             $table->timestamps();
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
     {
         Schema::drop('day_user');
         Schema::drop('days');
-	}
+    }
 
 }

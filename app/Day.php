@@ -3,9 +3,10 @@
 use Illuminate\Database\Eloquent\Model;
 
 
-class Day extends Model {
+class Day extends Model
+{
 
-	public $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = ['weekday', 'holiday', 'date'];
 
