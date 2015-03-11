@@ -48,7 +48,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function holidays()
     {
-        return $this->belongsToMany('App/Day')
+        return $this->belongsToMany('App\Day')
                     ->withPivot('authorized_by', 'authorized_at')
                     ->withTimestamps();
     }
