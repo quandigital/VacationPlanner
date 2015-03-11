@@ -18,6 +18,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
 
+    public $role;
+    /**
+     * Disable timestamps
+     *
+     * @var bool
+     */
     public $timestamps = false;
 
     /**
@@ -40,9 +46,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function days()
+    public function holidays()
     {
-        return $this->belongsToMany('App/Day')->withTimestamps();
+        return $this->belongsToMany('App/Day')
+                    ->withPivot('authorized_by', 'authorized_at')
+                    ->withTimestamps();
     }
 
 }
