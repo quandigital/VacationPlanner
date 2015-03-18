@@ -6,7 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Storages\Day\DayRepository;
 
-class DaysController extends Controller
+class DayController extends Controller
 {
 
     protected $day;
@@ -16,11 +16,8 @@ class DaysController extends Controller
         $this->day = $day;
     }
 
-    public function all()
-    {
-        return $this->day->index();
-
-    }
+    // access methods from EloquentDayRepository now via
+    // $this->day->anyMethod()
 
 }
 

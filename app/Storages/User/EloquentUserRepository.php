@@ -8,34 +8,51 @@ use Illuminate\Database\Eloquent\Model;
 class EloquentUserRepository implements UserRepository
 {
 
-    public function getAllRegisteredHolidaysOfAUser($id)
+    /**
+     * get all the registered holidays
+     * for the currently logged in user
+     *
+     * @return mixed
+     */
+
+    public function getAllRegisteredHolidaysOfAEmployee()
     {
-        $holidays = User::find($id)->holidays();
+        $holidays = Auth::user()->holidays()->get();
         return $holidays;
     }
 
-
     /**
-     * Adds a record to the pivot table
+     * Add a record to the pivot table
+     * for the currently logged in user
      *
-     * @param $user_id
-     * @param $day_id
      */
-    public function registerHolidayForAUser($user_id, $day_id)
+
+    public function addHolidayForAEmployee($day_id)
     {
-        User::find($user_id)->holidays()->attach($day_id);
+        Auth::user()->holidays()->attach($day_id);
     }
 
+    /**
+     * Update a record on the pivot table
+     * for the currently logged in user
+     *
+     */
+
+    public function updateHolidayForAEmployee($day_id)
+    {
+        Auth::user()->holidays()->updateExistingPivot($day_id);
+    }
 
     /**
-     * Removes a record from the pivot table
+     * Remove a record from the pivot table
+     * for the currently logged in user
      *
-     * @param $user_id
      * @param $day_id
      */
-    public function unregisterHolidayForAUser($user_id, $day_id)
+
+    public function deleteHolidayForAEmployee($day_id)
     {
-        User::find($user_id)->holidays()->detach($day_id);
+        Auth::user()->holidays()->detach($day_id);
     }
 
 }
