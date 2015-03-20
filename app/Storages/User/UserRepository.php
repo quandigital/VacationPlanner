@@ -7,10 +7,10 @@ interface UserRepository
 
     public function getAllRegisteredHolidaysOfAEmployee();
 
-    public function addHolidayForAEmployee($day_id);
+    public function addHolidayForAEmployee($holiday_id);
 
-    public function updateHolidayForAEmployee($day_id);
+    public function updateHolidayForAEmployee($holiday_id);
 
-    public function deleteHolidayForAEmployee($day_id);
+    public function deleteHolidayForAEmployee($holiday_id);
 
 }

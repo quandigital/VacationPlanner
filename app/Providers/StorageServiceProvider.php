@@ -19,10 +19,10 @@ class StorageServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind('App\Storages\Day\DayRepository',
-                         'App\Storages\Day\EloquentDayRepository');
+        $this->app->bind('App\Storages\Holiday\HolidayRepository',
+                         'App\Storages\Holiday\EloquentHolidayRepository');
         $this->app->bind('App\Storages\User\UserRepository',
-                         'App\Storages\User\UserRepository');
+                         'App\Storages\User\EloquentUserRepository');
         $this->app->bind('App\Storages\Supervisor\SupervisorRepository',
                          'App\Storages\Supervisor\EloquentSupervisorRepository');
     }

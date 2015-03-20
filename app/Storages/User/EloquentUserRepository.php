@@ -25,34 +25,39 @@ class EloquentUserRepository implements UserRepository
      * Add a record to the pivot table
      * for the currently logged in user
      *
+     * @param integer
+     * @return void
      */
 
-    public function addHolidayForAEmployee($day_id)
+    public function addHolidayForAEmployee($holiday_id)
     {
-        Auth::user()->holidays()->attach($day_id);
+        Auth::user()->holidays()->attach($holiday_id);
     }
 
     /**
      * Update a record on the pivot table
      * for the currently logged in user
      *
+     * @param integer
+     * @return void
      */
 
-    public function updateHolidayForAEmployee($day_id)
+    public function updateHolidayForAEmployee($holiday_id)
     {
-        Auth::user()->holidays()->updateExistingPivot($day_id);
+        Auth::user()->holidays()->updateExistingPivot($holiday_id);
     }
 
     /**
      * Remove a record from the pivot table
      * for the currently logged in user
      *
-     * @param $day_id
+     * @param integer
+     * @return void
      */
 
-    public function deleteHolidayForAEmployee($day_id)
+    public function deleteHolidayForAEmployee($holiday_id)
     {
-        Auth::user()->holidays()->detach($day_id);
+        Auth::user()->holidays()->detach($holiday_id);
     }
 
 }

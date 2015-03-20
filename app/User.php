@@ -18,7 +18,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $table = 'users';
 
-    public $role;
     /**
      * Disable timestamps
      *
@@ -31,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'role', 'supervised_by', 'holidays_total'];
+    protected $fillable = ['name', 'email', 'password', 'role', 'supervised_by', 'holidays_available'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -42,15 +41,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
-     * Get the days associated with the given user
+     * Get the holidays associated with the given user
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function holidays()
     {
-        return $this->belongsToMany('App\Day')
-                    ->withPivot('authorized_by', 'authorized_at')
-                    ->withTimestamps();
+        return $this->hasMany('App\Holiday');
     }
 
 }
