@@ -14,9 +14,11 @@ class CreateHolidaysTable extends Migration {
     {
         Schema::create('holidays', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->date('date');
-            $table->string('authorized_by');
-            $table->date('authorized_at');
+            $table->string('authorized_by')->nullable();
+            $table->date('authorized_at')->nullable();
             $table->timestamps();
         });
     }

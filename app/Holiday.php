@@ -12,15 +12,14 @@ class Holiday extends Model
      *
      * @var array
      */
-    protected $dates = ['date'];
-
+    protected $dates = ['date', 'authorized_at'];
 
     /**
      * Disable timestamps
      *
      * @var bool
      */
-    public $timestamps = false;
+    //public $timestamps = false;
 
 
     /**
@@ -28,7 +27,7 @@ class Holiday extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'date', 'authorized_by', 'authorized_at'];
+    protected $fillable = ['id', 'user_id', 'date', 'authorized_by', 'authorized_at'];
 
 
     /**
@@ -36,7 +35,7 @@ class Holiday extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
