@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 
-class Holiday extends Model
+class Day extends Model
 {
 
 
@@ -12,14 +12,15 @@ class Holiday extends Model
      *
      * @var array
      */
-    protected $dates = ['date', 'authorized_at'];
+    protected $dates = ['date'];
+
 
     /**
      * Disable timestamps
      *
      * @var bool
      */
-    //public $timestamps = false;
+    public $timestamps = false;
 
 
     /**
@@ -27,16 +28,18 @@ class Holiday extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'date', 'authorized_by', 'authorized_at'];
+    protected $fillable = ['weekday', 'holiday', 'date'];
 
 
     /**
-     * Get the user associated with the given holiday
+     * Get the users associated with the given day
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function user()
+    public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User')
+                    ->withPivot('authorized_by', 'authorized_at')
+                    ->withTimestamps();
     }
 }

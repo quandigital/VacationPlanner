@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->string('role');
             $table->string('supervised_by');
-            $table->integer('holidays_available')->unsigned();
+            $table->integer('days_off_left');
             $table->rememberToken();
         });
     }

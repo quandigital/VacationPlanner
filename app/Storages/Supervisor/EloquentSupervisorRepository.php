@@ -31,7 +31,8 @@ class EloquentSupervisorRepository implements SupervisorRepository {
 
     public function authorizeHoliday($id, $day_id)
     {
-
+        User::find($id)->holidays()->attach($day_id, ['authorized_by' => Auth::user()->name,
+                                                      'authorized_at' => Carbon::now()]);
     }
 
 }
