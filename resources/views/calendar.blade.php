@@ -3,15 +3,24 @@
 
 @section('content')
 
-    <table style="width:100%">
+    <link href="/css/calendar.css" rel="stylesheet">
 
-        <h3>Year: {{$date->__get('year')}}</h3>
-        <h3>Month: {{$date->__get('month')}}</h3>
+    <div class="year">{{$date->year}}</div>
+    <div class="month">{{$date->month}}</div>
+    <div class="counter">Available Days:
+        <div class="availableHolidays">{{$user->holidays_available}}</div>
+    </div>
+    @for($i = 1; $i <= $date->daysInMonth; $i++)
+        @if(array_key_exists($i, $month))
+            <div class="day highlighted">
+                @else
+                    <div class="day">
+                        @endif
+                        <div class="dayOfMonth">{{$i}}</div>
+                    </div>
+                    @endfor
+                    @endsection
 
-    </table>
+                    <a href="{{ action('PagesController@index', $date->subMonth()) }}"> prev </a>
 
-@endsection
-
-<a href="{{ action('PagesController@index', $date->subMonth()) }}"> prev </a>
-
-<a href="{{ action('PagesController@index', $date->addMonths(2)) }}"> next </a>
+                    <a href="{{ action('PagesController@index', $date->addMonths(2)) }}"> next </a>

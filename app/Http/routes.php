@@ -1,6 +1,8 @@
 <?php
 
-Route::get('/{date?}', 'PagesController@index');
+Route::get ('/{date?}', 'PagesController@index');
+Route::post ('/store', 'PagesController@store');
+Route::post ('/destroy', 'PagesController@destroy');
 
 /**
  * Authentication
