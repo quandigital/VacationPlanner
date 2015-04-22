@@ -24,3 +24,4 @@
                     <a href="{{ action('PagesController@index', $date->subMonth()) }}"> prev </a>
 
                     <a href="{{ action('PagesController@index', $date->addMonths(2)) }}"> next </a>
+

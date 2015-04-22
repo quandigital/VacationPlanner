@@ -1,7 +1,10 @@
 <?php namespace App\Providers;
 
+use App\Holiday;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +20,8 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+
+
     /**
      * Register any other events for your application.
      *
@@ -27,7 +32,12 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        Holiday::creating(function($user) {
+            $user = Auth::user();
+            $user->holidays_available = $user->holidays_available - 1;
+        });
+
+
     }
 
 }

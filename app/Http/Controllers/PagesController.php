@@ -9,14 +9,23 @@ use Illuminate\Support\Facades\Session;
 use App\User;
 use App\Holiday;
 use Auth;
+
 class PagesController extends Controller {
+
+    /**
+     * display a month including registered
+     * holidays of the logged in user
+     *
+     * @param null $date
+     * @return \Illuminate\View
+     */
 
     public function index($date = null)
     {   if (!Auth::user()) {
-        return view('auth.login');
+            return view('auth.login');
         }
         if (is_null($date)) {
-            $date = Carbon::now()->subdays(15);
+            $date = Carbon::now();
         }
         else {
             $date = Carbon::parse($date);
@@ -31,9 +40,18 @@ class PagesController extends Controller {
         foreach ($holidays as $holiday) {
             $month[date("j",strtotime($holiday['date']))] = $holiday;
         }
+        //return var_dump($holidays);
         //return var_dump($month);
         return view('calendar')->with('date', $date)->with('month', $month)->with('user', $user);
     }
+
+
+    /**
+     * store a holiday in the database
+     *
+     * @param Request $request
+     * @return Response
+     */
 
     public function store(Request $request)
     {
@@ -46,8 +64,16 @@ class PagesController extends Controller {
         $user->holidays()->save($holiday);
         $user->holidays_available = $user->holidays_available - 1;
         $user->save();
+
+        return response()->json(['counter' => $user->holidays_available]);
     }
 
+    /**
+     * delete a holiday from the database
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function destroy(Request $request)
     {
         $user = Auth::user();
@@ -57,6 +83,8 @@ class PagesController extends Controller {
         $user->holidays()->where('date', '=', $year.'-'.$month.'-'.$dayOfMonth)->delete();
         $user->holidays_available = $user->holidays_available + 1;
         $user->save();
+
+        return response()->json(['counter' => $user->holidays_available]);
     }
 
 

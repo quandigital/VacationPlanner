@@ -6,30 +6,34 @@ $(document).ready(function()
             {   var day = $(this).find('.dayOfMonth').text();
                 var month = $(document).find('.month').text();
                 var year = $(document).find('.year').text();
-
+                var elem = $(this);
+                var availableHolidays = $(document).find('.availableHolidays');
                 if ($(this).hasClass('highlighted')) {
-                    //var counter;
-                    $(this).toggleClass('highlighted');
+
                     $.ajax({type: 'POST',
                             url: '/destroy',
                             data: {dayOfMonth: day, month: month, year: year},
-                            success: function(response) {
-                                //$(this).removeClass('highlighted');
-
-                                //counter = $(document).find('.availableHolidays').text(parseInt($(document).find('.availableHolidays').text())+1);
+                            complete: function() {
+                                elem.addClass('complete');
+                            },
+                            success: function(data) {
+                                elem.removeClass('complete');
+                                elem.removeClass('highlighted');
+                                availableHolidays.text((data.counter));
                             }
+
                     });
                 }
                 else {
-                    $(this).toggleClass('highlighted');
+
                     $.ajax({type: 'POST',
                             url: '/store',
                             data: {dayOfMonth: day, month: month, year: year},
-                            success: function(response) {
-                                //$(this).addClass('highlighted');
-                                $(this).toggleClass('highlighted');
-                                //counter = $(document).find('.availableHolidays').text(parseInt($(document).find('.availableHolidays').text())-1);
+                            success: function(data) {
+                                elem.addClass('highlighted');
+                                availableHolidays.text((data.counter));
                             }
+
                     });
                 }
             }
