@@ -22,6 +22,8 @@ class Holiday extends Model
     protected $fillable = ['id', 'user_id', 'date', 'authorized_by', 'authorized_at'];
 
 
+
+
     /**
      * Get the user associated with the given holiday
      *
