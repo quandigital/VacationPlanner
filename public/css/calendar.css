@@ -1,0 +1,12 @@
+.day {
+    border: 1px dashed red;
+    float: left;
+    padding: 80;
+}
+.highlighted {
+    background-color: #31b0d5;
+    opacity: 80;
+}
+.toBeAuthorized {
+
+}

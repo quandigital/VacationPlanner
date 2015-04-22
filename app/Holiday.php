@@ -6,14 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 class Holiday extends Model
 {
 
-
-    /**
-     * Treat these attributes as Carbon instances
-     *
-     * @var array
-     */
-    protected $dates = ['date', 'authorized_at'];
-
     /**
      * Disable timestamps
      *
@@ -28,6 +20,8 @@ class Holiday extends Model
      * @var array
      */
     protected $fillable = ['id', 'user_id', 'date', 'authorized_by', 'authorized_at'];
+
+
 
 
     /**
